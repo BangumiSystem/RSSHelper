@@ -3,7 +3,7 @@ let version = "0.0.1";
 let description = "This is a good monkey";
 
 const config = {
-    entry: "./src/monkey.js"
+    entry: "./src/javascript/main.js"
 };
 
 const header = {
