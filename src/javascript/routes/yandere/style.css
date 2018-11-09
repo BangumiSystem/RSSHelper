@@ -1,0 +1,3 @@
+#post-list > div.sidebar > div:nth-child(1) > form > div {
+    display: flex;
+}
