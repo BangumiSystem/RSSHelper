@@ -1,4 +1,4 @@
-## RssHelper
+## RSSHelper
 
 [![Build Status](https://travis-ci.org/SettingDust/RssHelper.svg?branch=master)](https://travis-ci.org/SettingDust/RssHelper)
 
