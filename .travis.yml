@@ -4,12 +4,11 @@ node_js:
 - "lts/*"
 
 install:
-- yarn
+- npm i
 
 script:
 - npm run build
 
 cache:
-  yarn: true
   directories:
   - node_modules
