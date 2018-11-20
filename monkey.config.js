@@ -12,6 +12,7 @@ const header = {
     description: description,
     author: 'SettingDust',
     include: ['http*://*'],
+    license: 'MIT',
     require: ['https://cdn.bootcss.com/jquery/3.3.1/jquery.js'],
     grant: [
         //https://tampermonkey.net/documentation.php#GM_addStyle

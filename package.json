@@ -2,10 +2,15 @@
   "name": "rss-helper",
   "version": "0.0.1",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "gulp build --color",
     "dev": "gulp --color",
     "format": "prettier \"**/*.{js,json,md}\" --write"
+  },
+  "repository":{
+    "type": "git",
+    "url": "git+https://github.com/BangumiSystem/RSSHelper.git"
   },
   "gitHooks": {
     "pre-commit": "npm run format"
