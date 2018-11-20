@@ -14,11 +14,11 @@ gulp.task('stylus', () => {
 });
 
 gulp.task('stylus:watch', () =>
-    gulp.watch(paths.stylus).on('change', gulp.series('stylus')),
+    gulp.watch(paths.stylus).on('change', gulp.series('stylus'))
 );
 gulp.task('webpack', () => webpack(require('./webpack.dev.config')));
 
 gulp.task(
     'default',
-    gulp.series('stylus', gulp.parallel('stylus:watch', 'webpack')),
+    gulp.series('stylus', gulp.parallel('stylus:watch', 'webpack'))
 );

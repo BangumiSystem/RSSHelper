@@ -3,8 +3,8 @@ module.exports = class Router {
         this._routes = [];
     }
 
-    push(item) {
-        this.routes.push(item);
+    push(url, route) {
+        new Route(url, require(route));
     }
 
     get routes() {

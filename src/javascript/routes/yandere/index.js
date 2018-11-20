@@ -1,9 +1,7 @@
-const Route = require('../../include/route');
-
 const Router = require('../../include/router');
 const router = new Router();
 
-router.push(new Route('tags=(.{1,})', require('./posts')));
+router.push('tags=(.{1,})', './posts');
 
 module.exports = async (args) => {
     router.load(args);
