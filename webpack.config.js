@@ -8,35 +8,34 @@ module.exports = {
     entry: monkey.config.entry,
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename:
-            monkey.header.name.toLowerCase().replace(' ', '-') + '.user.js',
+        filename: monkey.header.name.toLowerCase().replace(' ', '-') + '.user.js'
     },
     mode: 'none',
     module: {
         rules: [
             {
-                test: /\.css/,
+                test: /\.css$/,
                 exclude: /(node_modules)/,
-                use: [{ loader: 'css-loader' }, { loader: 'postcss-loader' }],
+                use: [{ loader: 'css-loader' }, { loader: 'postcss-loader' }]
             },
             {
                 test: /\.(png|jpg|gif)$/,
-                use: ['url-loader'],
-            },
-        ],
+                use: ['url-loader']
+            }
+        ]
     },
     plugins: [
         new Terser({
             terserOptions: {
                 mangle: false,
                 output: {
-                    beautify: true,
-                },
-            },
+                    beautify: true
+                }
+            }
         }),
         new BannerPlugin({
             banner: monkey.buildedHeader(),
-            raw: true,
-        }),
-    ],
+            raw: true
+        })
+    ]
 };

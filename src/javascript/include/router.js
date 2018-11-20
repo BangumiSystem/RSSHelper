@@ -3,8 +3,8 @@ module.exports = class Router {
         this._routes = [];
     }
 
-    push(url, route) {
-        new Route(url, require(route));
+    push(router) {
+        this.routes.push(router);
     }
 
     get routes() {
@@ -13,6 +13,7 @@ module.exports = class Router {
 
     load(href) {
         this.routes.forEach((route) => {
+            console.log(route.match(href));
             if (route.match(href)) {
                 route.call(route.match(href));
             }

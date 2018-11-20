@@ -1,9 +1,11 @@
-const rssElem = require('../../include/feed').rssElem.clone();
-const rssPrefix = 'https://yande.re/post/piclens?tags=';
+const rssElem = $('<a/>');
+const rssPrefix = 'https://yande.re/post/piclens';
 
-module.exports = async (args) => {
-    rssElem.attr('href', `${rssPrefix}${args[1]}`);
-    $('#post-list > div.sidebar > div:nth-child(1) > form > div').append(
-        rssElem
-    );
+rssElem.attr('title', 'Feed');
+rssElem.attr('target', '_blank');
+rssElem.text('Feed');
+
+module.exports = async () => {
+    rssElem.attr('href', rssPrefix);
+    $('#post-list > div.sidebar > div:nth-child(1) > form > div').append(rssElem);
 };
