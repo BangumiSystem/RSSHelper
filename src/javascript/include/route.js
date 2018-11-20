@@ -14,12 +14,18 @@ module.exports = class Route {
 
     test(link) {
         let regex = new RegExp(this.url);
-        return regex.test(link);
+        if (link.input)
+            return regex.test(link.input);
+        else
+            return regex.test(link);
     }
 
     match(link) {
         let regex = new RegExp(this.url);
-        return regex.exec(link);
+        if (link.input)
+            return regex.exec(link.input);
+        else
+            return regex.exec(link);
     }
 
     call(args) {

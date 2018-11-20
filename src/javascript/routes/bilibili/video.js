@@ -1,13 +1,14 @@
 const rssPrefix = 'https://rsshub.app/bilibili/user/video/';
+const language = require('../../language/language');
 
 const rssElem = $('<a/>');
 rssElem.addClass('btn');
 rssElem.addClass('bi-btn');
 rssElem.attr('id', 'feed');
 rssElem.attr('target', '_blank');
-rssElem.text('Feed');
+rssElem.text(language.feed);
 
-module.exports = async () => {
+module.exports = async (args) => {
     let mid = $('#v_upinfo .u-face>a')
         .attr('href')
         .match(/\d+/)[0];
