@@ -9,22 +9,29 @@ const PrettierPlugin = require('prettier-webpack-plugin');
 if (!fs.existsSync('test')) fs.mkdirSync('test');
 fs.writeFileSync('./test/header.js', monkey.buildedHeader());
 
-console.log('Copy the content of test/header.js to your TamperMonkey plugin'.green);
+console.log(
+    'Copy the content of test/header.js to your TamperMonkey plugin'.green
+);
 
 module.exports = [
     {
         entry: monkey.config.entry,
         output: {
             path: path.resolve(__dirname, 'test'),
-            filename: monkey.header.name.toLowerCase().replace(' ', '-') + '.js',
+            filename:
+                monkey.header.name.toLowerCase().replace(' ', '-') + '.js',
         },
+        watch: true,
         mode: 'none',
         module: {
             rules: [
                 {
                     test: /\.css$/,
                     exclude: /(node_modules)/,
-                    use: [{ loader: 'styl-loader' }, { loader: 'css-loader' }, { loader: 'postcss-loader' }],
+                    use: [
+                        { loader: 'css-loader' },
+                        { loader: 'postcss-loader' },
+                    ],
                 },
                 {
                     test: /\.(png|jpg|gif)$/,
