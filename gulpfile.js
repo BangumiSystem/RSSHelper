@@ -4,7 +4,7 @@ const gulp = require('gulp'),
 const colors = require('colors');
 
 const paths = {
-    stylus: './src/javascript/routes/**/*.styl'
+    stylus: './src/javascript/routes/**/style.styl'
 };
 
 gulp.task('stylus', () => {
