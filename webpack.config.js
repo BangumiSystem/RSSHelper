@@ -14,9 +14,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.styl$/,
                 exclude: /(node_modules)/,
-                use: [{ loader: 'css-loader' }, { loader: 'postcss-loader' }],
+                use: [{ loader: 'styl-loader' }, { loader: 'css-loader' }, { loader: 'postcss-loader' }],
             },
             {
                 test: /\.(png|jpg|gif)$/,
