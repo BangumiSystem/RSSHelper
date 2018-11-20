@@ -12,7 +12,7 @@ module.exports = class Route {
         return this._route;
     }
 
-    test(link){
+    test(link) {
         let regex = new RegExp(this.url);
         return regex.test(link);
     }

@@ -14,6 +14,7 @@ module.exports = class Router {
     load(href) {
         this.routes.forEach((route) => {
             if (route.test(href)) {
+                console.debug('[RSSHelper]', route.match(href));
                 route.call(route.match(href));
             }
         });
