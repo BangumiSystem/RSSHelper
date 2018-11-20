@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "gulp build --color",
     "dev": "gulp --color",
     "format": "prettier \"**/*.{js,json,md}\" --write"
   },
