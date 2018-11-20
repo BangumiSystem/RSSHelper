@@ -10,9 +10,9 @@ fs.writeFileSync('./test/header.js', monkey.buildedHeader());
 
 console.log(
     `[` +
-    colors.grey('Webpack') +
-    `]` +
-    ' Copy the content of test/header.js to your TamperMonkey plugin'.green
+        colors.grey('Webpack') +
+        `]` +
+        ' Copy the content of test/header.js to your TamperMonkey plugin'.green
 );
 
 module.exports = {
@@ -28,7 +28,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: /(node_modules)/,
-                use: [ { loader: 'css-loader' }, { loader: 'postcss-loader' }]
+                use: [{ loader: 'css-loader' }, { loader: 'postcss-loader' }]
             },
             {
                 test: /\.(png|jpg|gif)$/,
