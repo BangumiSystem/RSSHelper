@@ -13,8 +13,7 @@ module.exports = class Router {
 
     load(href) {
         this.routes.forEach((route) => {
-            console.log(route.match(href));
-            if (route.match(href)) {
+            if (route.test(href)) {
                 route.call(route.match(href));
             }
         });
