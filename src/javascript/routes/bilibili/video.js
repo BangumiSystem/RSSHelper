@@ -4,6 +4,7 @@ const rssPrefix = `${config.rsshub}/bilibili/user/video/`;
 const rssElem = $('<a/>');
 rssElem.addClass('btn');
 rssElem.addClass('bi-btn');
+rssElem.attr('title', config.language.feed);
 rssElem.attr('id', 'feed');
 rssElem.attr('target', '_blank');
 rssElem.text(config.language.feed);

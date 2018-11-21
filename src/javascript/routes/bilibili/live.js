@@ -3,6 +3,7 @@ const rssPrefix = `${config.rsshub}/bilibili/live/room/`;
 
 const rssElem = $('<a/>');
 rssElem.addClass('p-absolute');
+rssElem.attr('title', config.language.feed);
 rssElem.attr('id', 'feed');
 rssElem.attr('target', '_blank');
 rssElem.text(config.language.feed);

@@ -59,7 +59,8 @@
 }([ function(module, exports, __webpack_require__) {
     const Route = __webpack_require__(1), router = new (__webpack_require__(3))();
     router.push(new Route(/yande\.re\/.*/, __webpack_require__(4))), router.push(new Route(/\/?.*\.?bilibili\.com\/.*/, __webpack_require__(13))), 
-    router.push(new Route(/\/?.*\.?weibo\.com\/.*/, __webpack_require__(18))), router.load(location.href);
+    router.push(new Route(/\/?.*\.?weibo\.com\/.*/, __webpack_require__(18))), router.push(new Route(/\/?.*\.?pixiv\.net\/.*/, __webpack_require__(20))), 
+    router.load(location.href);
 }, function(module, exports, __webpack_require__) {
     const pathToRegexp = __webpack_require__(2);
     module.exports = class {
@@ -209,13 +210,14 @@
     });
 }, function(module, exports, __webpack_require__) {
     const rssElem = $("<a/>"), config = __webpack_require__(6);
-    rssElem.attr("id", "feed"), rssElem.attr("title", "Feed"), rssElem.attr("target", "_blank"), 
+    rssElem.attr("id", "feed"), rssElem.attr("title", config.language.feed), rssElem.attr("target", "_blank"), 
     rssElem.text(config.language.feed), module.exports = (async args => {
         rssElem.attr("href", `https://yande.re/post/piclens?tags=${args[1]}`), $("#post-list > div.sidebar > div:nth-child(1) > form > div").append(rssElem);
     });
 }, function(module, exports, __webpack_require__) {
     console.debug("[RSSHelper]", __webpack_require__(7)("./en_US")), module.exports = {
-        language: __webpack_require__(7)("./en_US")
+        language: __webpack_require__(7)("./en_US"),
+        rsshub: "https://rsshub.app"
     };
 }, function(module, exports, __webpack_require__) {
     var map = {
@@ -244,15 +246,15 @@
     webpackContext.id = 7;
 }, function(module) {
     module.exports = {
-        feed: "Rss Feed"
+        feed: "RSS Feed"
     };
 }, function(module) {
     module.exports = {
-        feed: "Rss订阅"
+        feed: "RSS订阅"
     };
 }, function(module, exports, __webpack_require__) {
     const rssElem = $("<a/>"), config = __webpack_require__(6);
-    rssElem.attr("id", "feed"), rssElem.attr("title", "Feed"), rssElem.attr("target", "_blank"), 
+    rssElem.attr("id", "feed"), rssElem.attr("title", config.language.feed), rssElem.attr("target", "_blank"), 
     rssElem.text(config.language.feed), module.exports = (async () => {
         rssElem.attr("href", "https://yande.re/post/piclens"), $("#post-list > div.sidebar > div:nth-child(1) > form > div").append(rssElem);
     });
@@ -297,30 +299,31 @@
         router.load(args), GM_addStyle(__webpack_require__(17).toString()), console.debug("[RSSHelper]", __webpack_require__(17).toString());
     });
 }, function(module, exports, __webpack_require__) {
-    const config = __webpack_require__(6), rssElem = $("<a/>");
-    rssElem.addClass("btn"), rssElem.addClass("bi-btn"), rssElem.attr("id", "feed"), 
-    rssElem.attr("target", "_blank"), rssElem.text(config.language.feed), module.exports = (async () => {
+    const config = __webpack_require__(6), rssPrefix = `${config.rsshub}/bilibili/user/video/`, rssElem = $("<a/>");
+    rssElem.addClass("btn"), rssElem.addClass("bi-btn"), rssElem.attr("title", config.language.feed), 
+    rssElem.attr("id", "feed"), rssElem.attr("target", "_blank"), rssElem.text(config.language.feed), 
+    module.exports = (async () => {
         let mid = $("#v_upinfo .u-face>a").attr("href").match(/\d+/)[0];
-        rssElem.attr("href", `https://rsshub.app/bilibili/user/video/${mid}`);
+        rssElem.attr("href", `${rssPrefix}${mid}`);
         let task = setInterval(() => {
             $(".more-ops-list").length && ($("#v_upinfo .btn").prepend(rssElem), clearInterval(task));
         }, 500);
     });
 }, function(module, exports, __webpack_require__) {
-    const config = __webpack_require__(6), rssElem = $("<a/>");
-    rssElem.addClass("h-f-btn"), rssElem.attr("id", "feed"), rssElem.attr("target", "_blank"), 
-    rssElem.text(config.language.feed), module.exports = (async args => {
-        rssElem.attr("href", `https://rsshub.app/bilibili/user/dynamic/${args[1]}`);
+    const config = __webpack_require__(6), rssPrefix = `${config.rsshub}/bilibili/user/dynamic/`, rssElem = $("<a/>");
+    rssElem.addClass("h-f-btn"), rssElem.attr("title", config.language.feed), rssElem.attr("id", "feed"), 
+    rssElem.attr("target", "_blank"), rssElem.text(config.language.feed), module.exports = (async args => {
+        rssElem.attr("href", `${rssPrefix}${args[1]}`);
         let task = setInterval(() => {
             let elem = $(".h-action .h-message");
             elem.length && (elem.after(rssElem), clearInterval(task));
         }, 500);
     });
 }, function(module, exports, __webpack_require__) {
-    const config = __webpack_require__(6), rssElem = $("<a/>");
-    rssElem.addClass("p-absolute"), rssElem.attr("id", "feed"), rssElem.attr("target", "_blank"), 
-    rssElem.text(config.language.feed), module.exports = (async args => {
-        rssElem.attr("href", `https://rsshub.app/bilibili/live/room/${args[1]}`);
+    const config = __webpack_require__(6), rssPrefix = `${config.rsshub}/bilibili/live/room/`, rssElem = $("<a/>");
+    rssElem.addClass("p-absolute"), rssElem.attr("title", config.language.feed), rssElem.attr("id", "feed"), 
+    rssElem.attr("target", "_blank"), rssElem.text(config.language.feed), module.exports = (async args => {
+        rssElem.attr("href", `${rssPrefix}${args[1]}`);
         let task = setInterval(() => {
             let elem = $(".room-info-down-row .attention-btn-ctnr");
             elem.length && (elem.after(rssElem), clearInterval(task));
@@ -331,15 +334,43 @@
 }, function(module, exports, __webpack_require__) {
     const Route = __webpack_require__(1), router = new (__webpack_require__(3))();
     router.push(new Route(/\/(?!\d+\/)\d+/, __webpack_require__(19))), module.exports = (async args => {
-        router.load(args), GM_addStyle(__webpack_require__(20).toString()), console.debug("[RSSHelper]", __webpack_require__(20).toString());
+        router.load(args);
     });
 }, function(module, exports, __webpack_require__) {
-    const rssElem = $("<a/>"), config = __webpack_require__(6);
-    rssElem.addClass("W_btn_d"), rssElem.addClass("btn_34px"), rssElem.attr("title", "Feed"), 
+    const rssElem = $("<a/>"), config = __webpack_require__(6), rssPrefix = `${config.rsshub}/weibo/user/`;
+    rssElem.addClass("W_btn_d"), rssElem.addClass("btn_34px"), rssElem.attr("title", config.language.feed), 
     rssElem.addClass("W_btn_d"), rssElem.attr("target", "_blank"), rssElem.text(config.language.feed), 
     module.exports = (async () => {
-        rssElem.attr("href", "https://rsshub.app/weibo/user/" + $CONFIG.oid), $("div.pf_opt > div").append(rssElem);
+        rssElem.attr("href", rssPrefix + $CONFIG.oid), $("div.pf_opt > div").append(rssElem), 
+        console.debug("[RSSHelper]", "111");
     });
 }, function(module, exports, __webpack_require__) {
-    (module.exports = __webpack_require__(12)(!1)).push([ module.i, "", "" ]);
+    const Route = __webpack_require__(1), router = new (__webpack_require__(3))();
+    router.push(new Route(/member\.php\?id=\d+/, __webpack_require__(21))), router.push(new Route(/member_illust\.php\?.*illust_id=\d+/, __webpack_require__(22))), 
+    module.exports = (async args => {
+        router.load(args), GM_addStyle(__webpack_require__(23).toString()), console.debug("[RSSHelper]", __webpack_require__(23).toString());
+    });
+}, function(module, exports, __webpack_require__) {
+    const rssElem = $("<a/>"), config = __webpack_require__(6), rssPrefix = `${config.rsshub}/pixiv/user/`;
+    rssElem.addClass("YryPnZn _30SjOFD"), rssElem.attr("title", config.language.feed), 
+    rssElem.attr("id", "feed"), rssElem.attr("target", "_blank"), rssElem.text(config.language.feed), 
+    module.exports = (async () => {
+        rssElem.attr("href", rssPrefix + Object.keys(globalInitData.preload.user)[0]);
+        let task = setInterval(() => {
+            let elem = $("div._3yalhqB");
+            elem.length && (elem.append(rssElem), clearInterval(task));
+        }, 500);
+    });
+}, function(module, exports, __webpack_require__) {
+    const rssElem = $("<a/>"), config = __webpack_require__(6), rssPrefix = `${config.rsshub}/pixiv/user/`;
+    rssElem.addClass("YryPnZn"), rssElem.attr("title", config.language.feed), rssElem.attr("id", "feed"), 
+    rssElem.attr("target", "_blank"), rssElem.text(config.language.feed), module.exports = (async () => {
+        rssElem.attr("href", rssPrefix + Object.keys(globalInitData.preload.user)[0]);
+        let task = setInterval(() => {
+            let elem = $(".sc-dRCTWM.cRuxjo");
+            elem.length && (elem.append(rssElem), clearInterval(task));
+        }, 500);
+    });
+}, function(module, exports, __webpack_require__) {
+    (module.exports = __webpack_require__(12)(!1)).push([ module.i, "#feed{text-decoration:none}._3yalhqB{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;width:auto}._3yalhqB #feed{margin-left:12px}.sc-dRCTWM.cRuxjo #feed{margin-top:12px}", "" ]);
 } ]);

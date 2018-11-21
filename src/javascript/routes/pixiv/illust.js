@@ -1,19 +1,19 @@
-const config = require('../../config/config');
-const rssPrefix = `${config.rsshub}/bilibili/user/dynamic/`;
-
 const rssElem = $('<a/>');
-rssElem.addClass('h-f-btn');
+const config = require('../../config/config');
+const rssPrefix = `${config.rsshub}/pixiv/user/`;
+
+rssElem.addClass('YryPnZn');
 rssElem.attr('title', config.language.feed);
 rssElem.attr('id', 'feed');
 rssElem.attr('target', '_blank');
 rssElem.text(config.language.feed);
 
-module.exports = async (args) => {
-    rssElem.attr('href', `${rssPrefix}${args[1]}`);
+module.exports = async () => {
+    rssElem.attr('href', rssPrefix + Object.keys(globalInitData.preload.user)[0]);
     let task = setInterval(() => {
-        let elem = $('.h-action .h-message');
+        let elem = $('.sc-dRCTWM.cRuxjo');
         if (elem.length) {
-            elem.after(rssElem);
+            elem.append(rssElem);
             clearInterval(task);
         }
     }, 500);

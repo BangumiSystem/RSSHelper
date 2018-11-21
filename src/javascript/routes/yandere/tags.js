@@ -3,7 +3,7 @@ const rssPrefix = 'https://yande.re/post/piclens?tags=';
 const config = require('../../config/config');
 
 rssElem.attr('id', 'feed');
-rssElem.attr('title', 'Feed');
+rssElem.attr('title', config.language.feed);
 rssElem.attr('target', '_blank');
 rssElem.text(config.language.feed);
 

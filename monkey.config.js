@@ -16,7 +16,7 @@ const header = {
     require: ['https://cdn.bootcss.com/jquery/3.3.1/jquery.js'],
     grant: [
         //https://tampermonkey.net/documentation.php#GM_addStyle
-        'GM_addStyle' //GM_addStyle(require('file'))
+        'GM_addStyle' //GM_addStyle(require('file').toString())
     ]
 };
 

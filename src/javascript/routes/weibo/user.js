@@ -5,7 +5,7 @@ const rssPrefix = `${config.rsshub}/weibo/user/`;
 rssElem.addClass('W_btn_d');
 rssElem.addClass('btn_34px');
 
-rssElem.attr('title', 'Feed');
+rssElem.attr('title', config.language.feed);
 rssElem.addClass('W_btn_d');
 
 rssElem.attr('target', '_blank');
