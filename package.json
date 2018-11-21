@@ -13,7 +13,7 @@
     "url": "git+https://github.com/BangumiSystem/RSSHelper.git"
   },
   "gitHooks": {
-    "pre-commit": "npm run format"
+    "pre-commit": "npm run build"
   },
   "devDependencies": {
     "autoprefixer": "^9.3.1",
