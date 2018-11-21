@@ -1,11 +1,11 @@
 const rssPrefix = 'https://rsshub.app/bilibili/live/room/';
-const language = require('../../language/language');
+const config = require('../../config/config');
 
 const rssElem = $('<a/>');
 rssElem.addClass('p-absolute');
 rssElem.attr('id', 'feed');
 rssElem.attr('target', '_blank');
-rssElem.text(language.feed);
+rssElem.text(config.language.feed);
 
 module.exports = async (args) => {
     rssElem.attr('href', `${rssPrefix}${args[1]}`);
