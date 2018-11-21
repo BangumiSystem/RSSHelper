@@ -4,17 +4,20 @@ const gulp = require('gulp'),
 const colors = require('colors');
 
 const paths = {
-    stylus: './src/javascript/routes/**/style.styl'
+    stylus: {
+        all: './src/javascript/routes/**/*.styl',
+        main: './src/javascript/routes/**/style.styl'
+    }
 };
 
 gulp.task('stylus', () => {
     return gulp
-        .src(paths.stylus)
+        .src(paths.stylus.all)
         .pipe(stylus())
         .pipe(gulp.dest((file) => file.base));
 });
 
-gulp.task('stylus:watch', () => gulp.watch(paths.stylus).on('change', gulp.series('stylus')));
+gulp.task('stylus:watch', () => gulp.watch(paths.stylus.all).on('change', gulp.series('stylus')));
 
 gulp.task('webpack', (callback) =>
     webpack(require('./webpack.config'), (err, stats) => {

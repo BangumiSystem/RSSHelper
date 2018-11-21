@@ -8,7 +8,7 @@
     "dev": "gulp --color",
     "format": "prettier \"**/*.{js,json,md}\" --write"
   },
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/BangumiSystem/RSSHelper.git"
   },
@@ -22,6 +22,7 @@
     "cssnano": "^4.1.7",
     "gulp": "^4.0.0",
     "gulp-stylus": "^2.7.0",
+    "path-to-regexp": "^2.4.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.15.1",
     "stylus-loader": "^3.0.2",

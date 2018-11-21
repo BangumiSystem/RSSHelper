@@ -2,6 +2,7 @@ const rssElem = $('<a/>');
 const rssPrefix = 'https://yande.re/post/piclens';
 const language = require('../../language/language');
 
+rssElem.attr('id', 'feed');
 rssElem.attr('title', 'Feed');
 rssElem.attr('target', '_blank');
 rssElem.text(language.feed);

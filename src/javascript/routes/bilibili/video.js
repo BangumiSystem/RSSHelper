@@ -14,7 +14,7 @@ module.exports = async (args) => {
         .match(/\d+/)[0];
     rssElem.attr('href', `${rssPrefix}${mid}`);
     let task = setInterval(() => {
-        if ($('.b-cd .cd').length) {
+        if ($('.more-ops-list').length) {
             $('#v_upinfo .btn').prepend(rssElem);
             clearInterval(task);
         }
