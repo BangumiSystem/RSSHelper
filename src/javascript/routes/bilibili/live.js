@@ -1,5 +1,5 @@
-const rssPrefix = 'https://rsshub.app/bilibili/live/room/';
 const config = require('../../config/config');
+const rssPrefix = `${config.rsshub}/bilibili/live/room/`;
 
 const rssElem = $('<a/>');
 rssElem.addClass('p-absolute');

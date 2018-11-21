@@ -1,5 +1,5 @@
-const rssPrefix = 'https://rsshub.app/bilibili/user/video/';
 const config = require('../../config/config');
+const rssPrefix = `${config.rsshub}/bilibili/user/video/`;
 
 const rssElem = $('<a/>');
 rssElem.addClass('btn');

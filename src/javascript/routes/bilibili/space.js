@@ -1,5 +1,5 @@
-const rssPrefix = 'https://rsshub.app/bilibili/user/dynamic/';
 const config = require('../../config/config');
+const rssPrefix = `${config.rsshub}/bilibili/user/dynamic/`;
 
 const rssElem = $('<a/>');
 rssElem.addClass('h-f-btn');
