@@ -1,3 +1,4 @@
+const logger = require('./logger');
 module.exports = class Router {
     constructor() {
         this._routes = [];
@@ -12,10 +13,11 @@ module.exports = class Router {
     }
 
     load(href) {
-        console.debug('[RSSHelper]', this.routes);
-        this.routes.forEach((route) => {
+        logger.debug(this.routes);
+        this.routes.some((route) => {
             if (route.test(href)) {
                 route.call(route.match(href));
+                return true;
             }
         });
     }

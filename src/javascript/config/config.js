@@ -1,7 +1,8 @@
+const logger = require('../include/logger');
 const lang = 'en_US';
 
 // TODO add gui to edit config
-console.debug('[RSSHelper]', require(`./${lang}`));
+logger.debug(require(`./${lang}`));
 
 module.exports = {
     language: require(`./${lang}`),

@@ -1,6 +1,6 @@
-let name = 'Rss Helper';
-let version = '0.0.1';
-let description = 'This is a good monkey';
+let name = 'RSSHelper';
+let version = '0.0.3';
+let description = 'A way too add a rss feed button on webpage';
 
 const config = {
     entry: './src/javascript/index.js'
@@ -13,7 +13,7 @@ const header = {
     author: 'SettingDust',
     include: ['http*://*'],
     license: 'MIT',
-    require: ['https://cdn.bootcss.com/jquery/3.3.1/jquery.js'],
+    require: ['https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'],
     grant: [
         //https://tampermonkey.net/documentation.php#GM_addStyle
         'GM_addStyle' //GM_addStyle(require('file').toString())

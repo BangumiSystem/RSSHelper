@@ -14,5 +14,4 @@ rssElem.text(config.language.feed);
 module.exports = async () => {
     rssElem.attr('href', rssPrefix + $CONFIG.oid);
     $('div.pf_opt > div').append(rssElem);
-    console.debug('[RSSHelper]', '111');
 };
