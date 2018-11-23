@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         RSSHelper
-// @version      0.0.1
-// @description  A way too add a rss feed button on webpage
+// @version      0.0.4
+// @description  A way to add a rss feed button on webpage
 // @author       SettingDust
 //
 // @include      http*://*
@@ -219,8 +219,8 @@
 }, function(module, exports) {
     const header = {
         name: "RSSHelper",
-        version: "0.0.1",
-        description: "A way too add a rss feed button on webpage",
+        version: "0.0.4",
+        description: "A way to add a rss feed button on webpage",
         author: "SettingDust",
         include: [ "http*://*" ],
         license: "MIT",
@@ -373,11 +373,16 @@
         router.load(args);
     });
 }, function(module, exports, __webpack_require__) {
+    __webpack_require__(4);
     const rssElem = $("<a/>"), config = __webpack_require__(8), rssPrefix = `${config.rsshub}/weibo/user/`;
     rssElem.addClass("W_btn_d"), rssElem.addClass("btn_34px"), rssElem.attr("title", config.language.feed), 
     rssElem.addClass("W_btn_d"), rssElem.attr("target", "_blank"), rssElem.text(config.language.feed), 
     module.exports = (async () => {
-        rssElem.attr("href", rssPrefix + $CONFIG.oid), $("div.pf_opt > div").append(rssElem);
+        rssElem.attr("href", rssPrefix + $CONFIG.oid);
+        let task = setInterval(() => {
+            let elem = $("div.pf_opt > .opt_box");
+            elem.length && (elem.append(rssElem), clearInterval(task));
+        }, 500);
     });
 }, function(module, exports, __webpack_require__) {
     const Route = __webpack_require__(1), router = new (__webpack_require__(3))();

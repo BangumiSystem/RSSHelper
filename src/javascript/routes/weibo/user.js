@@ -1,3 +1,4 @@
+const logger = require('../../include/logger');
 const rssElem = $('<a/>');
 const config = require('../../config/config');
 const rssPrefix = `${config.rsshub}/weibo/user/`;
@@ -13,5 +14,11 @@ rssElem.text(config.language.feed);
 
 module.exports = async () => {
     rssElem.attr('href', rssPrefix + $CONFIG.oid);
-    $('div.pf_opt > div').append(rssElem);
+    let task = setInterval(() => {
+        let elem = $('div.pf_opt > .opt_box');
+        if (elem.length) {
+            elem.append(rssElem);
+            clearInterval(task);
+        }
+    }, 500);
 };
