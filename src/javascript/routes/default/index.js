@@ -41,10 +41,10 @@ module.exports = async () => {
         rssElemText.text(feeds[0].name);
         $('body').append(rssElem);
         rssElem.mouseenter(() => {
-            rssElem.css('width', rssElemText.width() + 24 + 8);
+            rssElem.css('width', rssElemText.width() + 30 + 8);
         });
         rssElem.mouseleave(() => {
-            rssElem.css('width', 24);
+            rssElem.css('width', 30);
         });
     });
     GM_addStyle(require('./style.css').toString());
