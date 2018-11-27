@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         RSSHelper
-// @version      0.0.4
+// @version      0.0.5
 // @description  A way to add a rss feed button on webpage
 // @author       SettingDust
 //
@@ -8,6 +8,7 @@
 // @license      MIT
 //
 // @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
+// @require      https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.min.js
 //
 // @grant        GM_addStyle
 // ==/UserScript==
@@ -219,12 +220,12 @@
 }, function(module, exports) {
     const header = {
         name: "RSSHelper",
-        version: "0.0.4",
+        version: "0.0.5",
         description: "A way to add a rss feed button on webpage",
         author: "SettingDust",
         include: [ "http*://*" ],
         license: "MIT",
-        require: [ "https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js" ],
+        require: [ "https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js", "https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.min.js" ],
         grant: [ "GM_addStyle" ]
     };
     module.exports.config = {
@@ -431,12 +432,12 @@
                 }
             }), logger.debug(feeds), rssElem.attr("href", feeds[0].href), rssElemText.text(feeds[0].name), 
             $("body").append(rssElem), rssElem.mouseenter(() => {
-                rssElem.css("width", rssElemText.width() + 24 + 8);
+                rssElem.css("width", rssElemText.width() + 30 + 8);
             }), rssElem.mouseleave(() => {
-                rssElem.css("width", 24);
+                rssElem.css("width", 30);
             });
         }), GM_addStyle(__webpack_require__(27).toString());
     });
 }, function(module, exports, __webpack_require__) {
-    (module.exports = __webpack_require__(14)(!1)).push([ module.i, "#user-feed{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;position:fixed;top:72px;z-index:12000;right:0;font-size:14px;border-bottom-left-radius:4px;border-top-left-radius:4px;background-color:#f8f8f8;padding:3px 4px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out;color:#212121!important;overflow:hidden;line-height:24px;width:24px}#user-feed svg{min-width:24px}#user-feed span{margin-left:4px;white-space:nowrap;opacity:0;-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out}#user-feed:hover{box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)}#user-feed:hover span{opacity:1}", "" ]);
+    (module.exports = __webpack_require__(14)(!1)).push([ module.i, "#user-feed{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;position:fixed;top:72px;z-index:12000;right:0;font-size:14px;border-bottom-left-radius:4px;border-top-left-radius:4px;background-color:#f8f8f8;padding:3px 4px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out;color:#212121!important;overflow:hidden;line-height:24px;width:30px;box-sizing:border-box}#user-feed svg{min-width:24px}#user-feed span{margin-left:4px;white-space:nowrap;opacity:0;-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out}#user-feed:hover{box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)}#user-feed:hover span{opacity:1}", "" ]);
 } ]);

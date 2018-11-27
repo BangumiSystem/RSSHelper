@@ -1,5 +1,5 @@
 let name = 'RSSHelper';
-let version = '0.0.4';
+let version = '0.0.5';
 let description = 'A way to add a rss feed button on webpage';
 
 const config = {
@@ -13,7 +13,10 @@ const header = {
     author: 'SettingDust',
     include: ['http*://*'],
     license: 'MIT',
-    require: ['https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'],
+    require: [
+        'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js',
+        'https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.min.js'
+    ],
     grant: [
         //https://tampermonkey.net/documentation.php#GM_addStyle
         'GM_addStyle' //GM_addStyle(require('file').toString())

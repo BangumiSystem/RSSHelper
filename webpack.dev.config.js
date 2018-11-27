@@ -37,13 +37,13 @@ module.exports = {
         ]
     },
     plugins: [
-        new Terser({
-            terserOptions: {
-                mangle: false,
-                output: {
-                    beautify: true
-                }
-            }
-        })
+        // new Terser({
+        //     terserOptions: {
+        //         mangle: false,
+        //         output: {
+        //             beautify: true
+        //         }
+        //     }
+        // })
     ]
 };

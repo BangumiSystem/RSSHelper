@@ -1,15 +1,13 @@
 const config = require('../../config/config');
 const rssPrefix = `${config.rsshub}/bilibili/user/dynamic/`;
 
-const rssElem = $('<a/>');
+const rssElem = $('<a\>').feedInit();
 rssElem.addClass('h-f-btn');
 rssElem.attr('title', config.language.feed);
-rssElem.attr('id', 'feed');
-rssElem.attr('target', '_blank');
 rssElem.text(config.language.feed);
 
 module.exports = async (args) => {
-    rssElem.attr('href', `${rssPrefix}${args[1]}`);
+    rssElem.href(`${rssPrefix}${args[1]}`);
     let task = setInterval(() => {
         let elem = $('.h-action .h-message');
         if (elem.length) {

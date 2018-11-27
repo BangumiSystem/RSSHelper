@@ -1,13 +1,11 @@
-const rssElem = $('<a/>');
 const rssPrefix = 'https://yande.re/post/piclens';
 const config = require('../../config/config');
 
-rssElem.attr('id', 'feed');
+const rssElem = $('<a\>').feedInit();
 rssElem.attr('title', config.language.feed);
-rssElem.attr('target', '_blank');
 rssElem.text(config.language.feed);
 
 module.exports = async () => {
-    rssElem.attr('href', rssPrefix);
+    rssElem.href(rssPrefix);
     $('#post-list > div.sidebar > div:nth-child(1) > form > div').append(rssElem);
 };

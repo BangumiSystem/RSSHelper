@@ -62,6 +62,6 @@ gulp.task('webpack:dev', () =>
     })
 );
 
-gulp.task('build', gulp.series(gulp.parallel('stylus', 'format'), 'webpack'));
+gulp.task('build', gulp.series('stylus', 'webpack', 'format'));
 
 gulp.task('default', gulp.series('stylus', gulp.parallel('stylus:watch', 'webpack:dev')));

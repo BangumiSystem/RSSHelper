@@ -1,3 +1,5 @@
+require('./include/jquery.feed');
+const logger = require('./include/logger');
 const Route = require('./include/route');
 
 const Router = require('./include/router');
@@ -11,3 +13,5 @@ router.push(new Route(/\/?.*\.?pixiv\.net\/.*/, require('./routes/pixiv')));
 router.push(new Route(/.+/, require('./routes/default')));
 
 router.load(location.href);
+
+new ClipboardJS('#rss-helper');
