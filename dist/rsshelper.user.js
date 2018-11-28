@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         RSSHelper
-// @version      0.0.5
+// @version      0.0.6
 // @description  A way to add a rss feed button on webpage
 // @author       SettingDust
 //
@@ -159,7 +159,7 @@ module.exports = {
 /***/ (function(module, exports) {
 
 let name = 'RSSHelper';
-let version = '0.0.5';
+let version = '0.0.6';
 let description = 'A way to add a rss feed button on webpage';
 
 const config = {
@@ -1161,7 +1161,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, "#user-feed{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;position:fixed;top:72px;z-index:12000;right:0;font-size:14px;border-bottom-left-radius:4px;border-top-left-radius:4px;background-color:#f8f8f8;padding:3px 4px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out;color:#212121!important;overflow:hidden;line-height:24px;width:30px;box-sizing:border-box}#user-feed svg{min-width:24px}#user-feed span{margin-left:4px;white-space:nowrap;opacity:0;-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out}#user-feed:hover{box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)}#user-feed:hover span{opacity:1}", ""]);
+exports.push([module.i, "#rss-helper{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;position:fixed;top:72px;z-index:12000;right:0;font-size:14px;border-bottom-left-radius:4px;border-top-left-radius:4px;background-color:#f8f8f8;padding:3px 4px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out;color:#212121!important;overflow:hidden;line-height:24px;width:30px;box-sizing:border-box}#rss-helper svg{min-width:24px}#rss-helper span{margin-left:4px;white-space:nowrap;opacity:0;-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out}#rss-helper:hover{box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)}#rss-helper:hover span{opacity:1}", ""]);
 
 // exports
 
