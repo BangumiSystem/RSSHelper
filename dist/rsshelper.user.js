@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         RSSHelper
-// @version      0.0.6
+// @version      0.0.7
 // @description  A way to add a rss feed button on webpage
 // @author       SettingDust
 //
@@ -113,9 +113,9 @@ const router = new Router();
 router.push(new Route(/yande\.re\/.*/, __webpack_require__(7)));
 router.push(new Route(/\/?.*\.?bilibili\.com\/.*/, __webpack_require__(16)));
 router.push(new Route(/\/?.*\.?weibo\.com\/.*/, __webpack_require__(21)));
-router.push(new Route(/\/?.*\.?pixiv\.net\/.*/, __webpack_require__(23)));
+router.push(new Route(/\/?.*\.?pixiv\.net\/.*/, __webpack_require__(22)));
 
-router.push(new Route(/.+/, __webpack_require__(27)));
+router.push(new Route(/.+/, __webpack_require__(26)));
 
 router.load(location.href);
 
@@ -159,7 +159,7 @@ module.exports = {
 /***/ (function(module, exports) {
 
 let name = 'RSSHelper';
-let version = '0.0.6';
+let version = '0.0.7';
 let description = 'A way to add a rss feed button on webpage';
 
 const config = {
@@ -975,47 +975,29 @@ exports.push([module.i, "#v_upinfo #rss-helper{padding-left:16px;padding-right:1
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const Route = __webpack_require__(4);
-
-const Router = __webpack_require__(6);
-const router = new Router();
-
-router.push(new Route(/\/(?!\d+\/)\d+/, __webpack_require__(22)));
-
-module.exports = async (args) => {
-    router.load(args);
-};
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
 const logger = __webpack_require__(2);
 const config = __webpack_require__(9);
 const rssPrefix = `${config.rsshub}/weibo/user/`;
 
 const rssElem = $('<a\>').feedInit();
-rssElem.addClass('W_btn_d');
-rssElem.addClass('btn_34px');
-
-rssElem.attr('title', config.language.feed);
-rssElem.text(config.language.feed);
 
 module.exports = async () => {
-    rssElem.href(rssPrefix + $CONFIG.oid);
-    let task = setInterval(() => {
-        let elem = $('div.pf_opt > .opt_box');
-        if (elem.length) {
-            elem.append(rssElem);
-            clearInterval(task);
+    window.onload = () => {
+        if ($('.opt_box.clearfix').length) {
+            rssElem.addClass('W_btn_d');
+            rssElem.addClass('btn_34px');
+
+            rssElem.attr('title', config.language.feed);
+            rssElem.text(config.language.feed);
+            rssElem.href(rssPrefix + $CONFIG.oid);
+
+            $('div.pf_opt > .opt_box').append(rssElem);
         }
-    }, 500);
+    };
 };
 
-
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const Route = __webpack_require__(4);
@@ -1024,18 +1006,18 @@ const logger = __webpack_require__(2);
 const Router = __webpack_require__(6);
 const router = new Router();
 
-router.push(new Route(/member\.php\?id=\d+/, __webpack_require__(24)));
-router.push(new Route(/member_illust\.php\?.*illust_id=\d+/, __webpack_require__(25)));
+router.push(new Route(/member\.php\?id=\d+/, __webpack_require__(23)));
+router.push(new Route(/member_illust\.php\?.*illust_id=\d+/, __webpack_require__(24)));
 
 module.exports = async (args) => {
     router.load(args);
-    GM_addStyle(__webpack_require__(26).toString());
-    logger.debug(__webpack_require__(26).toString());
+    GM_addStyle(__webpack_require__(25).toString());
+    logger.debug(__webpack_require__(25).toString());
 };
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const config = __webpack_require__(9);
@@ -1059,7 +1041,7 @@ module.exports = async () => {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const config = __webpack_require__(9);
@@ -1083,7 +1065,7 @@ module.exports = async () => {
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -1097,7 +1079,7 @@ exports.push([module.i, "#rss-helper{text-decoration:none}._3yalhqB{-webkit-box-
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const config = __webpack_require__(9);
@@ -1148,12 +1130,12 @@ module.exports = async () => {
             rssElem.css('width', 30);
         });
     });
-    GM_addStyle(__webpack_require__(28).toString());
+    GM_addStyle(__webpack_require__(27).toString());
 };
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
