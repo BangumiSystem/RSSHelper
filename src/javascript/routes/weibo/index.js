@@ -1,10 +1,20 @@
-const Route = require('../../include/route');
+const logger = require('../../include/logger');
+const config = require('../../config/config');
+const rssPrefix = `${config.rsshub}/weibo/user/`;
 
-const Router = require('../../include/router');
-const router = new Router();
+const rssElem = $('<a\>').feedInit();
 
-router.push(new Route(/\/(?!\d+\/)\d+/, require('./user')));
+module.exports = async () => {
+    window.onload = () => {
+        if ($('.opt_box.clearfix').length) {
+            rssElem.addClass('W_btn_d');
+            rssElem.addClass('btn_34px');
 
-module.exports = async (args) => {
-    router.load(args);
+            rssElem.attr('title', config.language.feed);
+            rssElem.text(config.language.feed);
+            rssElem.href(rssPrefix + $CONFIG.oid);
+
+            $('div.pf_opt > .opt_box').append(rssElem);
+        }
+    };
 };
