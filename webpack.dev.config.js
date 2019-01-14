@@ -10,9 +10,9 @@ fs.writeFileSync('./test/header.js', monkey.buildedHeader());
 
 console.log(
     `[` +
-        colors.grey('Webpack') +
-        `]` +
-        ' Copy the content of test/header.js to your TamperMonkey plugin'.green
+    colors.grey('Webpack') +
+    `]` +
+    ' Copy the content of test/header.js to your TamperMonkey plugin'.green
 );
 
 module.exports = {

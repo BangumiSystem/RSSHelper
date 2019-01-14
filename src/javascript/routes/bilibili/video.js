@@ -14,7 +14,7 @@ module.exports = async () => {
     rssElem.href(`${rssPrefix}${mid}`);
     let task = setInterval(() => {
         if ($('.more-ops-list').length) {
-            $('#v_upinfo .btn').prepend(rssElem);
+            $('#v_upinfo .btn').append(rssElem);
             clearInterval(task);
         }
     }, 500);
