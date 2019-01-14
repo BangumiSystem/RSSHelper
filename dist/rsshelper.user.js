@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         RSSHelper
-// @version      0.0.7
+// @version      0.0.8
 // @description  A way to add a rss feed button on webpage
 // @author       SettingDust
 //
@@ -159,7 +159,7 @@ module.exports = {
 /***/ (function(module, exports) {
 
 let name = 'RSSHelper';
-let version = '0.0.7';
+let version = '0.0.8';
 let description = 'A way to add a rss feed button on webpage';
 
 const config = {
@@ -902,7 +902,7 @@ module.exports = async () => {
     rssElem.href(`${rssPrefix}${mid}`);
     let task = setInterval(() => {
         if ($('.more-ops-list').length) {
-            $('#v_upinfo .btn').prepend(rssElem);
+            $('#v_upinfo .btn').append(rssElem);
             clearInterval(task);
         }
     }, 500);
@@ -966,7 +966,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, "#v_upinfo #rss-helper{padding-left:16px;padding-right:16px;margin-left:12px;margin-top:0}.room-info-down-row #rss-helper{height:22px;line-height:22px;padding-left:16px;padding-right:16px;background-color:#23ade5;color:#fff!important;border-radius:4px;right:130px;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out}.room-info-down-row #rss-helper:hover{background-color:#23b9f1}", ""]);
+exports.push([module.i, "#v_upinfo #rss-helper{padding-left:16px;padding-right:16px;margin-left:12px;margin-top:0}#v_upinfo>.btn{margin-left:0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.room-info-down-row #rss-helper{height:22px;line-height:22px;padding-left:16px;padding-right:16px;background-color:#23ade5;color:#fff!important;border-radius:4px;right:130px;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out}.room-info-down-row #rss-helper:hover{background-color:#23b9f1}", ""]);
 
 // exports
 
