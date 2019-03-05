@@ -1120,15 +1120,17 @@ module.exports = async () => {
             }
         });
         logger.debug(feeds);
-        rssElem.href(feeds[0].href);
-        rssElemText.text(feeds[0].name);
-        $('body').append(rssElem);
-        rssElem.mouseenter(() => {
-            rssElem.css('width', rssElemText.width() + 30 + 8);
-        });
-        rssElem.mouseleave(() => {
-            rssElem.css('width', 30);
-        });
+        if (feeds.length) {
+            rssElem.href(feeds[0].href);
+            rssElemText.text(feeds[0].name);
+            $('body').append(rssElem);
+            rssElem.mouseenter(() => {
+                rssElem.css('width', rssElemText.width() + 30 + 8);
+            });
+            rssElem.mouseleave(() => {
+                rssElem.css('width', 30);
+            });
+        }
     });
     GM_addStyle(__webpack_require__(27).toString());
 };
