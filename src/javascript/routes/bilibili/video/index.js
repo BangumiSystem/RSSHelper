@@ -1,8 +1,9 @@
-const config = require('../../config/config');
+const config = require('../../../config/config');
 const rssPrefix = `${config.rsshub}/bilibili/user/video/`;
 
 const rssElem = $('<a\>').feedInit();
 rssElem.addClass('btn');
+rssElem.addClass('default-btn');
 rssElem.addClass('bi-btn');
 rssElem.attr('title', config.language.feed);
 rssElem.text(config.language.feed);
@@ -13,9 +14,14 @@ module.exports = async () => {
         .match(/\d+/)[0];
     rssElem.href(`${rssPrefix}${mid}`);
     let task = setInterval(() => {
-        if ($('.more-ops-list').length) {
-            $('#v_upinfo .btn').append(rssElem);
+        if ($('.trynew-btn').length) {
+            rssElem.addClass('old');
+            $('.followe.btn').append(rssElem);
             clearInterval(task);
         }
-    }, 500);
+        if ($('.more-ops-list').length) {
+            $('.btn-panel').append(rssElem);
+            clearInterval(task);
+        }
+    }, 100);
 };

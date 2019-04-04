@@ -1,15 +1,15 @@
-const config = require('../../config/config');
-const rssPrefix = `${config.rsshub}/bilibili/live/room/`;
+const config = require('../../../config/config');
+const rssPrefix = `${config.rsshub}/bilibili/user/dynamic/`;
 
 const rssElem = $('<a\>').feedInit();
-rssElem.addClass('p-absolute');
+rssElem.addClass('h-f-btn');
 rssElem.attr('title', config.language.feed);
 rssElem.text(config.language.feed);
 
 module.exports = async (args) => {
     rssElem.href(`${rssPrefix}${args[1]}`);
     let task = setInterval(() => {
-        let elem = $('.room-info-down-row .attention-btn-ctnr');
+        let elem = $('.h-action .h-message');
         if (elem.length) {
             elem.after(rssElem);
             clearInterval(task);
