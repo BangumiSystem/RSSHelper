@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         RSSHelper
-// @version      0.0.9
+// @version      0.1.0
 // @description  A way to add a rss feed button on webpage
 // @author       SettingDust
 //
@@ -11,6 +11,8 @@
 // @require      https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.min.js
 //
 // @grant        GM_addStyle
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
 
 /******/ (function(modules) { // webpackBootstrap
@@ -236,7 +238,7 @@ module.exports = {
 /***/ (function(module, exports) {
 
 let name = 'RSSHelper';
-let version = '0.0.9';
+let version = '0.1.0';
 let description = 'A way to add a rss feed button on webpage';
 
 const config = {
@@ -256,7 +258,9 @@ const header = {
     ],
     grant: [
         //https://tampermonkey.net/documentation.php#GM_addStyle
-        'GM_addStyle' //GM_addStyle(require('file').toString())
+        'GM_addStyle', //GM_addStyle(require('file').toString())
+        'GM_setValue',
+        'GM_getValue'
     ]
 };
 
@@ -562,7 +566,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "#v_upinfo .followe{margin-left:-89px}#v_upinfo .btn-panel{margin-left:0;top:8px;position:relative}#rss-helper{padding:4px 16px;margin-left:12px;margin-top:0}#rss-helper.old{height:20px;line-height:20px}", ""]);
+exports.push([module.i, "#v_upinfo .followe{margin-left:-89px}#v_upinfo .btn-panel{margin-left:0;top:8px;position:relative;-webkit-box-pack:end;-webkit-justify-content:flex-end;justify-content:flex-end}#rss-helper{padding:4px 16px;margin-left:12px;margin-top:0}#rss-helper.old{height:20px;line-height:20px}", ""]);
 
 // exports
 
@@ -836,8 +840,11 @@ const variable = __webpack_require__(9);
 const { language } = variable;
 const logger = __webpack_require__(5);
 
-const rssElem = $('<a\>').feedInit();
+const rssContainer = $('<div\>').feedInit();
+
+const rssElem = $('<a\>');
 rssElem.attr('target', '_blank');
+rssElem.addClass('rss-item');
 rssElem.append('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>');
 
 const rssElemText = $('<span\>');
@@ -859,8 +866,15 @@ module.exports = async () => {
         'text/atom',
         'text/rdf'
     ];
+    const links = [
+        '/feed',
+        '/rss',
+        '/rss.xml',
+        '/atom.xml',
+        '/feed.xml'
+    ];
     let feeds = [];
-    $(() => {
+    $(async () => {
         $('link[type]').each(function() {
             if (types.includes($(this).attr('type'))) {
                 let feed = {
@@ -872,15 +886,47 @@ module.exports = async () => {
         });
         logger.debug(feeds);
         if (feeds.length) {
-            rssElem.href(feeds[0].href);
-            rssElemText.text(feeds[0].name);
-            $('body').append(rssElem);
-            rssElem.mouseenter(() => {
-                rssElem.css('width', rssElemText.width() + 30 + 8);
-            });
-            rssElem.mouseleave(() => {
-                rssElem.css('width', 30);
-            });
+            for (const feed of feeds) {
+                const rssElemClone = rssElem.clone();
+                rssElemClone.href(feed.href.startsWith('/') ? `${location.protocol}//${location.host}${feed.href}` : feed.href);
+                rssElemClone.find('span').text(feed.name);
+                rssContainer.append(rssElemClone);
+                rssElemClone.mouseenter(() => {
+                    rssElemClone.css('width', rssElemClone.find('span').width() + 30 + 8);
+                });
+                rssElemClone.mouseleave(() => {
+                    rssElemClone.css('width', 30);
+                });
+            }
+            $('body').append(rssContainer);
+        } else {
+            for (const link of links) {
+                fetch(link, {
+                    headers: {
+                        'User-Agent': 'curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3'
+                    }
+                }).then(async (data) => {
+                    if (data.ok) {
+                        const html = await data.text();
+                        logger.debug(link);
+                        if (html.startsWith('<rss') || html.includes('\n<feed xmlns=')) {
+                            const rssElemClone = rssElem.clone();
+                            rssElemClone.href(data.url);
+                            rssElemClone.find('span').text(html.match(/title>(.+)<\/title/)[1]);
+                            rssContainer.append(rssElemClone);
+                            rssElemClone.mouseenter(() => {
+                                rssElemClone.css('width', rssElemClone.find('span').width() + 30 + 8);
+                            });
+                            rssElemClone.mouseleave(() => {
+                                rssElemClone.css('width', 30);
+                            });
+                        }
+                    }
+                }).catch((data) => {
+                    logger.debug(data);
+                });
+                $('body').append(rssContainer);
+            }
         }
     });
     GM_addStyle(__webpack_require__(34).toString());
@@ -896,7 +942,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "#rss-helper{display:-webkit-box;display:-webkit-flex;display:flex;position:fixed;top:72px;z-index:12000;right:0;font-size:14px;border-bottom-left-radius:4px;border-top-left-radius:4px;background-color:#f8f8f8;padding:3px 4px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out;color:#212121!important;overflow:hidden;line-height:24px;width:30px;box-sizing:border-box}#rss-helper svg{min-width:24px}#rss-helper span{margin-left:4px;white-space:nowrap;opacity:0;-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out}#rss-helper:hover{box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)}#rss-helper:hover span{opacity:1}", ""]);
+exports.push([module.i, "#rss-helper{display:grid;justify-items:end;grid-gap:8px;position:fixed;bottom:128px;z-index:12000;right:0;font-size:14px;color:#212121!important;line-height:24px}#rss-helper .rss-item{display:-webkit-box;display:-webkit-flex;display:flex;width:30px;box-sizing:border-box;border-bottom-left-radius:4px;border-top-left-radius:4px;background-color:#f8f8f8;overflow:hidden;padding:3px 4px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out}#rss-helper .rss-item svg{min-width:24px}#rss-helper .rss-item span{margin-left:4px;white-space:nowrap;opacity:0;-webkit-transition:125ms ease-in-out;transition:125ms ease-in-out}#rss-helper .rss-item:hover{box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)}#rss-helper .rss-item:hover span{opacity:1}", ""]);
 
 // exports
 

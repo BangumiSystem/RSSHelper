@@ -50,7 +50,7 @@ module.exports = async () => {
         if (feeds.length) {
             for (const feed of feeds) {
                 const rssElemClone = rssElem.clone();
-                rssElemClone.href(feed.href);
+                rssElemClone.href(feed.href.startsWith('/') ? `${location.protocol}//${location.host}${feed.href}` : feed.href);
                 rssElemClone.find('span').text(feed.name);
                 rssContainer.append(rssElemClone);
                 rssElemClone.mouseenter(() => {
@@ -62,10 +62,33 @@ module.exports = async () => {
             }
             $('body').append(rssContainer);
         } else {
-        }
-        for (const link of links) {
-            const data = await fetch(link);
-            console.log(data);
+            for (const link of links) {
+                fetch(link, {
+                    headers: {
+                        'User-Agent': 'curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3'
+                    }
+                }).then(async (data) => {
+                    if (data.ok) {
+                        const html = await data.text();
+                        logger.debug(link);
+                        if (html.startsWith('<rss') || html.includes('\n<feed xmlns=')) {
+                            const rssElemClone = rssElem.clone();
+                            rssElemClone.href(data.url);
+                            rssElemClone.find('span').text(html.match(/title>(.+)<\/title/)[1]);
+                            rssContainer.append(rssElemClone);
+                            rssElemClone.mouseenter(() => {
+                                rssElemClone.css('width', rssElemClone.find('span').width() + 30 + 8);
+                            });
+                            rssElemClone.mouseleave(() => {
+                                rssElemClone.css('width', 30);
+                            });
+                        }
+                    }
+                }).catch((data) => {
+                    logger.debug(data);
+                });
+                $('body').append(rssContainer);
+            }
         }
     });
     GM_addStyle(require('./style.css').toString());
