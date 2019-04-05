@@ -2,8 +2,11 @@ const variable = require('../../config/variable');
 const { language } = variable;
 const logger = require('../../include/logger');
 
-const rssElem = $('<a\>').feedInit();
+const rssContainer = $('<div\>').feedInit();
+
+const rssElem = $('<a\>');
 rssElem.attr('target', '_blank');
+rssElem.addClass('rss-item');
 rssElem.append('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>');
 
 const rssElemText = $('<span\>');
@@ -25,8 +28,15 @@ module.exports = async () => {
         'text/atom',
         'text/rdf'
     ];
+    const links = [
+        '/feed',
+        '/rss',
+        '/rss.xml',
+        '/atom.xml',
+        '/feed.xml'
+    ];
     let feeds = [];
-    $(() => {
+    $(async () => {
         $('link[type]').each(function() {
             if (types.includes($(this).attr('type'))) {
                 let feed = {
@@ -38,15 +48,24 @@ module.exports = async () => {
         });
         logger.debug(feeds);
         if (feeds.length) {
-            rssElem.href(feeds[0].href);
-            rssElemText.text(feeds[0].name);
-            $('body').append(rssElem);
-            rssElem.mouseenter(() => {
-                rssElem.css('width', rssElemText.width() + 30 + 8);
-            });
-            rssElem.mouseleave(() => {
-                rssElem.css('width', 30);
-            });
+            for (const feed of feeds) {
+                const rssElemClone = rssElem.clone();
+                rssElemClone.href(feed.href);
+                rssElemClone.find('span').text(feed.name);
+                rssContainer.append(rssElemClone);
+                rssElemClone.mouseenter(() => {
+                    rssElemClone.css('width', rssElemClone.find('span').width() + 30 + 8);
+                });
+                rssElemClone.mouseleave(() => {
+                    rssElemClone.css('width', 30);
+                });
+            }
+            $('body').append(rssContainer);
+        } else {
+        }
+        for (const link of links) {
+            const data = await fetch(link);
+            console.log(data);
         }
     });
     GM_addStyle(require('./style.css').toString());

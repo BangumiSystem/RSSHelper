@@ -19,7 +19,9 @@ const header = {
     ],
     grant: [
         //https://tampermonkey.net/documentation.php#GM_addStyle
-        'GM_addStyle' //GM_addStyle(require('file').toString())
+        'GM_addStyle', //GM_addStyle(require('file').toString())
+        'GM_setValue',
+        'GM_getValue'
     ]
 };
 

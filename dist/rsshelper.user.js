@@ -139,10 +139,10 @@ const router = new Router();
 module.exports = () => {
     router.push(new Route(/yande\.re\/.*/, __webpack_require__(7)));
     router.push(new Route(/\/?.*\.?bilibili\.com\/.*/, __webpack_require__(17)));
-    router.push(new Route(/\/?.*\.?weibo\.com\/.*/, __webpack_require__(27)));
-    router.push(new Route(/\/?.*\.?pixiv\.net\/.*/, __webpack_require__(28)));
+    router.push(new Route(/\/?.*\.?weibo\.com\/.*/, __webpack_require__(28)));
+    router.push(new Route(/\/?.*\.?pixiv\.net\/.*/, __webpack_require__(29)));
 
-    router.push(new Route(/.+/, __webpack_require__(32)));
+    router.push(new Route(/.+/, __webpack_require__(33)));
 
     router.load(location.href);
 };
@@ -511,8 +511,7 @@ const router = new Router();
 router.push(new Route(/video\/av\d+/, __webpack_require__(18)));
 router.push(new Route(/space\.bilibili\.com\/\d+/, __webpack_require__(20)));
 router.push(new Route(/live\.bilibili\.com\/\d+/, __webpack_require__(21)));
-router.push(new Route(/bangumi\/media\/md(\d+)/, __webpack_require__(23)));
-router.push(new Route(/bangumi\/play\/ep\d+/, __webpack_require__(25)));
+router.push(new Route(/bangumi/, __webpack_require__(23)));
 
 module.exports = async (args) => {
     router.load(args);
@@ -637,6 +636,23 @@ exports.push([module.i, ".room-info-down-row #rss-helper{height:22px;line-height
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
+const Route = __webpack_require__(3);
+
+const Router = __webpack_require__(4);
+const router = new Router();
+
+router.push(new Route(/media\/md(\d+)/, __webpack_require__(24)));
+router.push(new Route(/play\/ep\d+/, __webpack_require__(26)));
+
+module.exports = async (args) => {
+    router.load(args);
+};
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
 const variable = __webpack_require__(9);
 const { language, rsshub } = variable;
 const rssPrefix = `${rsshub}/bilibili/bangumi/media/`;
@@ -649,12 +665,12 @@ rssElem.text(language.feed);
 module.exports = async (ctx) => {
     rssElem.href(`${rssPrefix}${ctx[1]}`);
     $('.bangumi-btn').after(rssElem);
-    GM_addStyle(__webpack_require__(24).toString());
+    GM_addStyle(__webpack_require__(25).toString());
 };
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(16)(false);
@@ -668,7 +684,7 @@ exports.push([module.i, "#rss-helper{width:128px;height:48px;line-height:48px;ba
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const variable = __webpack_require__(9);
@@ -684,12 +700,12 @@ module.exports = async () => {
     const mdid = $('.info-title>a').attr('href').match(/(\d+)/);
     rssElem.href(`${rssPrefix}${mdid}`);
     $('.bangumi-btn').after(rssElem);
-    GM_addStyle(__webpack_require__(26).toString());
+    GM_addStyle(__webpack_require__(27).toString());
 };
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(16)(false);
@@ -703,7 +719,7 @@ exports.push([module.i, "#rss-helper{width:80px;height:28px;line-height:28px;bac
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const variable = __webpack_require__(9);
@@ -729,7 +745,7 @@ module.exports = async () => {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const Route = __webpack_require__(3);
@@ -738,18 +754,18 @@ const logger = __webpack_require__(5);
 const Router = __webpack_require__(4);
 const router = new Router();
 
-router.push(new Route(/member\.php\?id=\d+/, __webpack_require__(29)));
-router.push(new Route(/member_illust\.php\?.*illust_id=\d+/, __webpack_require__(30)));
+router.push(new Route(/member\.php\?id=\d+/, __webpack_require__(30)));
+router.push(new Route(/member_illust\.php\?.*illust_id=\d+/, __webpack_require__(31)));
 
 module.exports = async (args) => {
     router.load(args);
-    GM_addStyle(__webpack_require__(31).toString());
-    logger.debug(__webpack_require__(31).toString());
+    GM_addStyle(__webpack_require__(32).toString());
+    logger.debug(__webpack_require__(32).toString());
 };
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const variable = __webpack_require__(9);
@@ -774,7 +790,7 @@ module.exports = async () => {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const variable = __webpack_require__(9);
@@ -799,7 +815,7 @@ module.exports = async () => {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(16)(false);
@@ -813,7 +829,7 @@ exports.push([module.i, "#rss-helper{text-decoration:none}._3yalhqB{-webkit-box-
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const variable = __webpack_require__(9);
@@ -867,12 +883,12 @@ module.exports = async () => {
             });
         }
     });
-    GM_addStyle(__webpack_require__(33).toString());
+    GM_addStyle(__webpack_require__(34).toString());
 };
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(16)(false);
