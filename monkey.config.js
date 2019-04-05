@@ -1,5 +1,5 @@
 let name = 'RSSHelper';
-let version = '0.0.8';
+let version = '0.0.9';
 let description = 'A way to add a rss feed button on webpage';
 
 const config = {

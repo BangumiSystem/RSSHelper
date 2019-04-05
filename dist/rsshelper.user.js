@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         RSSHelper
-// @version      0.0.8
+// @version      0.0.9
 // @description  A way to add a rss feed button on webpage
 // @author       SettingDust
 //
@@ -139,10 +139,10 @@ const router = new Router();
 module.exports = () => {
     router.push(new Route(/yande\.re\/.*/, __webpack_require__(7)));
     router.push(new Route(/\/?.*\.?bilibili\.com\/.*/, __webpack_require__(17)));
-    router.push(new Route(/\/?.*\.?weibo\.com\/.*/, __webpack_require__(25)));
-    router.push(new Route(/\/?.*\.?pixiv\.net\/.*/, __webpack_require__(26)));
+    router.push(new Route(/\/?.*\.?weibo\.com\/.*/, __webpack_require__(27)));
+    router.push(new Route(/\/?.*\.?pixiv\.net\/.*/, __webpack_require__(28)));
 
-    router.push(new Route(/.+/, __webpack_require__(30)));
+    router.push(new Route(/.+/, __webpack_require__(32)));
 
     router.load(location.href);
 };
@@ -236,7 +236,7 @@ module.exports = {
 /***/ (function(module, exports) {
 
 let name = 'RSSHelper';
-let version = '0.0.8';
+let version = '0.0.9';
 let description = 'A way to add a rss feed button on webpage';
 
 const config = {
@@ -509,9 +509,10 @@ const Router = __webpack_require__(4);
 const router = new Router();
 
 router.push(new Route(/video\/av\d+/, __webpack_require__(18)));
-router.push(new Route(/space\.bilibili\.com\/(\d+)/, __webpack_require__(20)));
-router.push(new Route(/live\.bilibili\.com\/(\d+)/, __webpack_require__(21)));
+router.push(new Route(/space\.bilibili\.com\/\d+/, __webpack_require__(20)));
+router.push(new Route(/live\.bilibili\.com\/\d+/, __webpack_require__(21)));
 router.push(new Route(/bangumi\/media\/md(\d+)/, __webpack_require__(23)));
+router.push(new Route(/bangumi\/play\/ep\d+/, __webpack_require__(25)));
 
 module.exports = async (args) => {
     router.load(args);
@@ -661,13 +662,48 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "#rss-helper{width:128px;height:48px;line-height:48px;background-color:#f36392;border-radius:8px;text-align:center;color:#fff;font-size:18px;cursor:pointer;-webkit-transition:all .3s ease;transition:all .3s ease}", ""]);
+exports.push([module.i, "#rss-helper{width:128px;height:48px;line-height:48px;background-color:#f36392;border-radius:8px;text-align:center;color:#fff;font-size:18px;-webkit-transition:all .3s ease;transition:all .3s ease}", ""]);
 
 // exports
 
 
 /***/ }),
 /* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const variable = __webpack_require__(9);
+const { language, rsshub } = variable;
+const rssPrefix = `${rsshub}/bilibili/bangumi/media/`;
+
+const rssElem = $('<a\>').feedInit();
+rssElem.addClass('bangumi-btn');
+rssElem.attr('title', language.feed);
+rssElem.text(language.feed);
+
+module.exports = async () => {
+    const mdid = $('.info-title>a').attr('href').match(/(\d+)/);
+    rssElem.href(`${rssPrefix}${mdid}`);
+    $('.bangumi-btn').after(rssElem);
+    GM_addStyle(__webpack_require__(26).toString());
+};
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(16)(false);
+// imports
+
+
+// module
+exports.push([module.i, "#rss-helper{width:80px;height:28px;line-height:28px;background-color:#f36392;border:1px solid #f36392;border-radius:4px;text-align:center;color:#fff;font-size:14px}.bangumi-info .info-right .info-title h2{width:500px}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const variable = __webpack_require__(9);
@@ -693,7 +729,7 @@ module.exports = async () => {
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const Route = __webpack_require__(3);
@@ -702,18 +738,18 @@ const logger = __webpack_require__(5);
 const Router = __webpack_require__(4);
 const router = new Router();
 
-router.push(new Route(/member\.php\?id=\d+/, __webpack_require__(27)));
-router.push(new Route(/member_illust\.php\?.*illust_id=\d+/, __webpack_require__(28)));
+router.push(new Route(/member\.php\?id=\d+/, __webpack_require__(29)));
+router.push(new Route(/member_illust\.php\?.*illust_id=\d+/, __webpack_require__(30)));
 
 module.exports = async (args) => {
     router.load(args);
-    GM_addStyle(__webpack_require__(29).toString());
-    logger.debug(__webpack_require__(29).toString());
+    GM_addStyle(__webpack_require__(31).toString());
+    logger.debug(__webpack_require__(31).toString());
 };
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const variable = __webpack_require__(9);
@@ -738,7 +774,7 @@ module.exports = async () => {
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const variable = __webpack_require__(9);
@@ -763,7 +799,7 @@ module.exports = async () => {
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(16)(false);
@@ -777,7 +813,7 @@ exports.push([module.i, "#rss-helper{text-decoration:none}._3yalhqB{-webkit-box-
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const variable = __webpack_require__(9);
@@ -831,12 +867,12 @@ module.exports = async () => {
             });
         }
     });
-    GM_addStyle(__webpack_require__(31).toString());
+    GM_addStyle(__webpack_require__(33).toString());
 };
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(16)(false);
