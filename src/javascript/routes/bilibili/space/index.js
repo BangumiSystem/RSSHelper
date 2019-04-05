@@ -1,10 +1,11 @@
-const config = require('../../../config/config');
-const rssPrefix = `${config.rsshub}/bilibili/user/dynamic/`;
+const variable = require('../../../config/variable');
+const { language, rsshub } = variable;
+const rssPrefix = `${rsshub}/bilibili/user/dynamic/`;
 
 const rssElem = $('<a\>').feedInit();
 rssElem.addClass('h-f-btn');
-rssElem.attr('title', config.language.feed);
-rssElem.text(config.language.feed);
+rssElem.attr('title', language.feed);
+rssElem.text(language.feed);
 
 module.exports = async (args) => {
     rssElem.href(`${rssPrefix}${args[1]}`);

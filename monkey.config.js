@@ -14,7 +14,7 @@ const header = {
     include: ['http*://*'],
     license: 'MIT',
     require: [
-        'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js',
+        'https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js',
         'https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.min.js'
     ],
     grant: [

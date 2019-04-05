@@ -1,6 +1,6 @@
-const logger = require('../../include/logger');
-const config = require('../../config/config');
-const rssPrefix = `${config.rsshub}/weibo/user/`;
+const variable = require('../../config/variable');
+const { language, rsshub } = variable;
+const rssPrefix = `${rsshub}/weibo/user/`;
 
 const rssElem = $('<a\>').feedInit();
 
@@ -10,9 +10,9 @@ module.exports = async () => {
             rssElem.addClass('W_btn_d');
             rssElem.addClass('btn_34px');
 
-            rssElem.attr('title', config.language.feed);
-            rssElem.text(config.language.feed);
-            rssElem.href(rssPrefix + $CONFIG.oid);
+            rssElem.attr('title', language.feed);
+            rssElem.text(language.feed);
+            rssElem.href(rssPrefix + $oid);
 
             $('div.pf_opt > .opt_box').append(rssElem);
         }

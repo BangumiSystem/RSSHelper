@@ -1,10 +1,11 @@
-const config = require('../../../config/config');
-const rssPrefix = `${config.rsshub}/bilibili/live/room/`;
+const variable = require('../../../config/variable');
+const { language, rsshub } = variable;
+const rssPrefix = `${rsshub}/bilibili/live/room/`;
 
 const rssElem = $('<a\>').feedInit();
 rssElem.addClass('p-absolute');
-rssElem.attr('title', config.language.feed);
-rssElem.text(config.language.feed);
+rssElem.attr('title', language.feed);
+rssElem.text(language.feed);
 
 module.exports = async (args) => {
     rssElem.href(`${rssPrefix}${args[1]}`);
@@ -15,4 +16,5 @@ module.exports = async (args) => {
             clearInterval(task);
         }
     }, 500);
+    GM_addStyle(require('./style.css').toString());
 };

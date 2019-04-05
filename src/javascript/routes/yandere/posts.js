@@ -1,9 +1,10 @@
 const rssPrefix = 'https://yande.re/post/piclens';
-const config = require('../../config/config');
+const variable = require('../../config/variable');
+const { language } = variable;
 
 const rssElem = $('<a\>').feedInit();
-rssElem.attr('title', config.language.feed);
-rssElem.text(config.language.feed);
+rssElem.attr('title', language.feed);
+rssElem.text(language.feed);
 
 module.exports = async () => {
     rssElem.href(rssPrefix);

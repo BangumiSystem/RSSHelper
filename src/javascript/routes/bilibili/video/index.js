@@ -1,12 +1,13 @@
-const config = require('../../../config/config');
-const rssPrefix = `${config.rsshub}/bilibili/user/video/`;
+const variable = require('../../../config/variable');
+const { language, rsshub } = variable;
+const rssPrefix = `${rsshub}/bilibili/user/video/`;
 
 const rssElem = $('<a\>').feedInit();
 rssElem.addClass('btn');
 rssElem.addClass('default-btn');
 rssElem.addClass('bi-btn');
-rssElem.attr('title', config.language.feed);
-rssElem.text(config.language.feed);
+rssElem.attr('title', language.feed);
+rssElem.text(language.feed);
 
 module.exports = async () => {
     let mid = $('#v_upinfo .u-face>a')
@@ -24,4 +25,5 @@ module.exports = async () => {
             clearInterval(task);
         }
     }, 100);
+    GM_addStyle(require('./style.css').toString());
 };

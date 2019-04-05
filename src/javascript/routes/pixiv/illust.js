@@ -1,10 +1,11 @@
-const config = require('../../config/config');
-const rssPrefix = `${config.rsshub}/pixiv/user/`;
+const variable = require('../../config/variable');
+const { language, rsshub } = variable;
+const rssPrefix = `${rsshub}/pixiv/user/`;
 
 const rssElem = $('<a\>').feedInit();
 rssElem.addClass('YryPnZn');
-rssElem.attr('title', config.language.feed);
-rssElem.text(config.language.feed);
+rssElem.attr('title', language.feed);
+rssElem.text(language.feed);
 
 module.exports = async () => {
     rssElem.href(rssPrefix + Object.keys(globalInitData.preload.user)[0]);

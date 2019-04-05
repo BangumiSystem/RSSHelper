@@ -1,5 +1,3 @@
-const pathToRegexp = require('path-to-regexp');
-
 module.exports = class Route {
     constructor(url, route) {
         this._url = url;
@@ -15,13 +13,13 @@ module.exports = class Route {
     }
 
     test(link) {
-        let regex = pathToRegexp(this.url);
+        let regex = new RegExp(this.url);
         if (link.input) return regex.test(link.input);
         else return regex.test(link);
     }
 
     match(link) {
-        let regex = pathToRegexp(this.url);
+        let regex = new RegExp(this.url);
         if (link.input) return regex.exec(link.input);
         else return regex.exec(link);
     }
